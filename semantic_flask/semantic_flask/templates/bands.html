@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block title %}Bands{% endblock %}
+{% block content %}
+<h1>All bands</h1>
+<table class="table table-bordered">
+    <thead class="thead-dark">
+    <tr>
+        <th>Band</th>
+        <th>Current member</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for band in bands %}
+    <tr>
+        <td about={{band["band"].value}}><span property="foaf:name">{{band["name"].value}}</span></td>
+        <td about={{band["artist"].value}}>
+            <span property="foaf:name">
+                {{band["artistname"].value}}
+            </span>
+            <span rel=":isMemberOf">
+                <span resource={{band["band"].value}}></span>
+            </span>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

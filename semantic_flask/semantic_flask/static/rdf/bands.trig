@@ -128,6 +128,18 @@
     			    :nickname "Papa Het";
     			    :isMemberOf :Metallica;
     			    dbo:instrument dbr:Guitars.
+    :CliffBurton a mo:MusicArtist;
+    			    foaf:name "Cliff Burton";
+    			    :wasMemberOf :Metallica;
+    			    dbo:instrument :Electric_bass.
+    :JasonNewsted a mo:MusicArtist;
+    			    foaf:name "Jason Newsted";
+    			    :wasMemberOf :Metallica;
+    			    dbo:instrument :Electric_bass.
+    :DaveMustaine a mo:MusicArtist;
+    			  foaf:name "Dave Mustaine";
+    			  :wasMemberOf :Metallica;
+    			  dbo:instrument dbr:Guitars.
     			    
     :MikeMangini a mo:MusicArtist;
     			   foaf:name "Mike Mangini";
@@ -153,6 +165,18 @@
     			   foaf:name "Mike Portnoy";
     			   :wasMemberOf :DreamTheater;
     			   dbo:instrument dbr:Drum_kit.
+    :KevinMoore a mo:MusicArtist;
+    			  foaf:name "Kevin Moore";
+    			  :wasMemberOf :DreamTheater;
+    			  dbo:instrument dbr:Keyboards.
+    :DerekSherinian a mo:MusicArtist;
+    			  foaf:name "Derek Sherinian";
+    			  :wasMemberOf :DreamTheater;
+    			  dbo:instrument dbr:Keyboards.
+    :CharlieDominici a mo:MusicArtist;
+    			  foaf:name "Charlie Dominici";
+    			  :wasMemberOf :DreamTheater;
+    			  dbo:instrument dbr:Singing.
 }
 
 :Albums
