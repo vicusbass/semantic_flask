@@ -1,0 +1,184 @@
+@prefix : <http://example.org/> .
+@prefix dbr: <http://dbpedia.org/resource#/> .
+@prefix dbo: <http://dbpedia.org/ontology#/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix mo: <http://purl.org/ontology/mo/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix schema: <http://schema.org/> .
+@prefix  owl: <http://www.w3.org/2002/07/owl#> .
+
+:Ontology
+{
+    :member a owl:TopObjectProperty;
+             rdfs:domain mo:MusicArtist;
+             rdfs:range schema:MusicGroup;
+             rdfs:comment "Represents a relationship between musicians and musical groups".
+
+    :isMemberOf a owl:TopObjectProperty;
+                 rdfs:domain mo:MusicArtist;
+                 rdfs:range schema:MusicGroup;
+                 rdfs:comment "Existing relationship between musicians and musical groups";
+                 rdfs:subPropertyOf :member.
+
+    :wasMemberOf a owl:TopObjectProperty;
+                  rdfs:domain mo:MusicArtist;
+                  rdfs:range schema:MusicGroup;
+                  rdfs:comment "Previous relationship between musicians and musical groups";
+                  rdfs:subPropertyOf :member.
+
+    :style a owl:TopObjectProperty;
+           rdfs:domain schema:MusicGroup;
+           rdfs:range mo:Genre;
+           rdfs:comment "Primary style of music";
+           rdfs:subPropertyOf dbo:genre.
+
+    :byArtist a owl:TopObjectProperty;
+           rdfs:domain schema:MusicAlbum;
+           rdfs:range schema:MusicGroup;
+           rdfs:comment "Recorded by artist".
+
+    :nickname a owl:DatatypeProperty ;
+              rdfs:domain mo:MusicArtist ;
+              rdfs:range xsd:string ;
+              rdfs:comment "Artist's nickname" .
+
+    :released a owl:DatatypeProperty ;
+              rdfs:domain schema:MusicAlbum;
+              rdfs:range xsd:int ;
+              rdfs:comment "Year when the album was released" .
+
+    :EP a rdfs:Resource;
+         rdfs:subClassOf schema:MusicAlbum;
+         rdfs:comment "Extended play type of album".
+
+    :LP a rdfs:Resource;
+         rdfs:subClassOf schema:MusicAlbum;
+         rdfs:comment "Long play type of album".
+
+    :Bootleg a rdfs:Resource;
+              rdfs:subClassOf :LP;
+              rdfs:comment "LP album recorded live, more or less legally, definetely lower quality".
+
+    :LiveLP a rdfs:Resource;
+              rdfs:subClassOf :LP;
+              rdfs:comment "LP album recorded live".
+
+    :Compilation a rdfs:Resource;
+                 rdfs:subClassOf :LP;
+                 rdfs:comment "A collection of songs from different albums".
+
+    :Electric_bass a rdfs:Resource;
+                    rdfs:subClassOf dbr:Guitar;
+                    rdfs:comment "4-6 strings electric guitar using lower octaves".
+
+    :Rock a rdfs:Resource;
+             rdfs:subClassOf mo:Genre;
+	 		 dc:title "Rock";
+	 		 rdfs:comment "The genre that changed everything.".
+	:Heavy_metal a rdfs:Resource;
+	 			  dc:title "Heavy Metal";
+	 			  rdfs:comment "Genre suited for real men.";
+	 			  rdfs:subClassOf    :Rock .
+	:Prog_metal a rdfs:Resource;
+	 			 dc:title "Prog Metal";
+	 			 rdfs:comment "Genre suited for musicians and brilliant geeks.";
+	 			 rdfs:subClassOf    :Rock .
+}
+
+:Bands
+{
+	:Metallica foaf:name "Metallica";
+			   rdf:type schema:MusicGroup;
+			   :style :Heavy_metal;
+			   foaf:member :JamesHetfield;
+			   foaf:member :LarsUrlich;
+			   foaf:member :KirkHammett;
+			   foaf:member :RobertTrujillo.
+	:DreamTheater foaf:name "Dream Theater";
+				  rdf:type schema:MusicGroup;
+			      :style :Prog_metal;
+			      foaf:member :JamesLaBrie;
+			   	  foaf:member :JohnPetrucci;
+			   	  foaf:member :JohnMyung;
+				  foaf:member :MikeMangini;
+			   	  foaf:member :JordanRudess.
+}
+:Artists
+{
+	:LarsUrlich a mo:MusicArtist;
+    			   foaf:name "Lars Urlich";
+    			   :isMemberOf :Metallica;
+    			   :nickname "Flathead";
+    			   dbo:instrument dbr:Drum_kit.			   
+    :RobertTrujillo a mo:MusicArtist;
+    			    foaf:name "Robert Trujillo";
+    			    :isMemberOf :Metallica;
+    			    dbo:instrument :Electric_bass.
+    :KirkHammett a mo:MusicArtist;
+    			  foaf:name "Kirk Hammett";
+    			  :isMemberOf :Metallica;
+    			  :nickname "Ripper";
+    			  dbo:instrument dbr:Guitars.
+    :JamesHetfield  a mo:MusicArtist;
+    				a mo:singer;
+    			    foaf:name "James Hetfield";
+    			    :nickname "Papa Het";
+    			    :isMemberOf :Metallica;
+    			    dbo:instrument dbr:Guitars.
+    			    
+    :MikeMangini a mo:MusicArtist;
+    			   foaf:name "Mike Mangini";
+    			   :isMemberOf :DreamTheater;
+    			   dbo:instrument dbr:Drum_kit.
+    :JohnMyung a mo:MusicArtist;
+    			    foaf:name "John Myung";
+    			    :isMemberOf :DreamTheater;
+    			    dbo:instrument :Electric_bass.
+    :JohnPetrucci a mo:MusicArtist;
+    			  foaf:name "John Petrucci";
+    			  :isMemberOf :DreamTheater;
+    			  dbo:instrument dbr:Guitars.
+    :JordanRudess a mo:MusicArtist;
+    			  foaf:name "Jordan Rudess";
+    			  :isMemberOf :DreamTheater;
+    			  dbo:instrument dbr:Keyboards.
+    :JamesLaBrie a mo:MusicArtist;
+    			  foaf:name "James LaBrie";
+    			  :isMemberOf :DreamTheater;
+    			  dbo:instrument dbr:Singing.
+    :MikePortnoy a mo:MusicArtist;
+    			   foaf:name "Mike Portnoy";
+    			   :wasMemberOf :DreamTheater;
+    			   dbo:instrument dbr:Drum_kit.
+}
+
+:Albums
+{
+    :Scenes_from_a_memory a :LP;
+                          :released 1999;
+                          dc:title "Scenes from a memory";
+                          :byArtist :DreamTheater.
+    :Once_in_a_LIVEtime a :LiveLP;
+                        :released 1998;
+                        dc:title "Once in a LIVEtime";
+                        :byArtist :DreamTheater.
+    :Awake_demos a :Bootleg;
+                 :released 1994;
+                 dc:title "Awake demos";
+                 :byArtist :DreamTheater.
+    :The_black_album a :LP;
+                          :released 1991;
+                          dc:title "The black album";
+                          :byArtist :Metallica.
+    :The_Metallica_collection a :Compilation;
+                          :released 2009;
+                          dc:title "The metallica collection";
+                          :byArtist :Metallica.
+    :Beyond_magnetic a :EP;
+                          :released 2011;
+                          dc:title "Beyond magnetic";
+                          :byArtist :Metallica.
+}

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link href="{{ url_for('static', filename='rdf/bands.trig', _external=True) }}" rel="meta" title="TRIG" type="application/trig">
+        <title>Bands</title>
+    </head>
+    <body>
+    <h1>Prog Metal genre bands</h1>
+    <h2>{{ band[0] }}</h2>
+    <h2>{{ band[1] }}</h2>
+    <a href={{band[0]}}>{{ band[1] }}</a>
+    </body>
+</html>
