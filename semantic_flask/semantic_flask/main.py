@@ -29,12 +29,16 @@ def list_bands():
     sparql.setQuery("""
                     prefix : <http://example.org/>
                     prefix foaf: <http://xmlns.com/foaf/0.1/>
-                    select ?band ?name ?artist ?artistname
+                    prefix dc: <http://purl.org/dc/elements/1.1/>
+                    prefix schema: <http://schema.org/>
+                    select distinct ?band ?name ?logo ?style ?stylename
                     where
                     {
                     ?band foaf:member ?artist .
                     ?band  foaf:name  ?name .
-                    ?artist foaf:name ?artistname .
+                    ?band schema:logo ?logo .
+                    ?band :style ?style .
+                    ?style dc:title ?stylename .
                     }
                      """)
     sparql.setReturnFormat(JSON)

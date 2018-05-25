@@ -1,8 +1,6 @@
 {% extends "layout.html" %}
 {% block title %}Bands{% endblock %}
 {% block content %}
-<h1>All artists</h1>
-<br/>
 <br/>
 <h4>Current band members are displayed in green</h4>
 <table class="table table-bordered">
@@ -15,15 +13,15 @@
     <tbody>
     {% for artist in artists %}
     <tr class="{{'table-success' if 'isMemberOf' in artist['predicate'].value}}">
-    <td about={{artist["artist"].value}}>
+        <td about={{artist["artist"].value}}>
             <span property="foaf:name">
                 {{artist["artistname"].value}}
             </span>
-        <span rel={{artist["predicate"].value}}>
+            <span rel={{artist["predicate"].value}}>
                 <span resource={{artist["band"].value}}></span>
             </span>
-    </td>
-    <td about={{artist["band"].value}}><span property="foaf:name">{{artist["bandname"].value}}</span></td>
+        </td>
+        <td about={{artist["band"].value}}><span property="foaf:name">{{artist["bandname"].value}}</span></td>
     </tr>
     {% endfor %}
     </tbody>

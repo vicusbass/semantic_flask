@@ -92,14 +92,18 @@
 {
 	:Metallica foaf:name "Metallica";
 			   rdf:type schema:MusicGroup;
+			   mo:activity_start "1981-01-01T00:00:00Z";
 			   :style :Heavy_metal;
+			   schema:logo "https://upload.wikimedia.org/wikipedia/commons/b/b7/Metallica_logo.png";
 			   foaf:member :JamesHetfield;
 			   foaf:member :LarsUrlich;
 			   foaf:member :KirkHammett;
 			   foaf:member :RobertTrujillo.
 	:DreamTheater foaf:name "Dream Theater";
 				  rdf:type schema:MusicGroup;
+				  mo:activity_start: "1985-01-01T00:00:00Z";
 			      :style :Prog_metal;
+			      schema:logo "https://upload.wikimedia.org/wikipedia/commons/4/48/Dream_Theater_%28Logo%29.png";
 			      foaf:member :JamesLaBrie;
 			   	  foaf:member :JohnPetrucci;
 			   	  foaf:member :JohnMyung;

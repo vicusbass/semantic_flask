@@ -18,6 +18,16 @@
     {% endblock %}
 </head>
 <body prefix=": http://example.org">
-<div class="container" id="content">{% block content %}{% endblock %}</div>
+<div class="container" id="content">
+    <ul class="nav justify-content-center">
+        <li class="nav-item">
+            <a class="nav-link" href="/bands">Bands</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/artists">Artists</a>
+        </li>
+    </ul>
+    {% block content %}{% endblock %}
+</div>
 </body>
 </html>
