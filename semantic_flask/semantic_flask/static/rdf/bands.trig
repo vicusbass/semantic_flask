@@ -80,12 +80,12 @@
 	 		 rdfs:comment "The genre that changed everything.".
 	:Heavy_metal a rdfs:Resource;
 	 			  dc:title "Heavy Metal";
-	 			  rdfs:comment "Genre suited for real men.";
-	 			  rdfs:subClassOf    :Rock .
+	 			  rdfs:subClassOf mo:Genre;
+	 			  rdfs:comment "Genre suited for real men.".
 	:Prog_metal a rdfs:Resource;
+	             rdfs:subClassOf mo:Genre;
 	 			 dc:title "Prog Metal";
-	 			 rdfs:comment "Genre suited for musicians and brilliant geeks.";
-	 			 rdfs:subClassOf    :Rock .
+	 			 rdfs:comment "Genre suited for musicians and brilliant geeks.".
 }
 
 :Bands

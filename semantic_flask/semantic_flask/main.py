@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for
 from rdflib import Graph
 from SPARQLWrapper import SPARQLWrapper2, JSON
 
@@ -9,20 +9,22 @@ g = Graph()
 sparql = SPARQLWrapper2("http://localhost:8080/rdf4j-server/repositories/bands")
 
 
-def get_by_genre():
+def list_genres():
     sparql.setQuery("""
-                    prefix : <http://example.org/>
-                    prefix foaf: <http://xmlns.com/foaf/0.1/>
-                    select ?band ?name
+                    PREFIX dc: <http://purl.org/dc/elements/1.1/>
+                    PREFIX mo: <http://purl.org/ontology/mo/>
+                    prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                    select ?genre ?genretitle
                     where
                     {
-                    ?band :style :Prog_metal .
-                    ?band  foaf:name  ?name .
+                        ?genre rdfs:subClassOf mo:Genre .
+                        ?genre dc:title ?genretitle .
                     }
+                    ORDER BY ?genretitle
                      """)
     sparql.setReturnFormat(JSON)
     result = sparql.queryAndConvert()
-    return result.getValues("band")[0].value, result.getValues("name")[0].value
+    return sparql.query().bindings
 
 
 def list_bands():
@@ -69,9 +71,7 @@ def list_artists():
 
 @app.route("/")
 def home_page():
-    return render_template("index.html",
-                           band=get_by_genre()
-                           )
+    return render_template("index.html")
 
 
 @app.route("/bands")
@@ -86,3 +86,41 @@ def artists_page():
     return render_template("artists.html",
                            artists=list_artists()
                            )
+
+
+@app.route("/addband")
+def addband_page():
+    return render_template("addband.html",
+                           genres=list_genres()
+                           )
+
+
+@app.route('/result', methods=['POST'])
+def result_band_added():
+    if request.method == 'POST':
+        sparql_insert = SPARQLWrapper2("http://localhost:8080/rdf4j-server/repositories/bands/statements")
+        result = request.form
+        band_name = result["band_name"]
+        style = result["style"]
+        activity_started = result["activity_started"] + "-01-01T00:00:00Z"
+        logo_url = result["logo_url"]
+        query = """
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX : <http://example.org/> 
+            PREFIX schema: <http://schema.org/>
+            PREFIX mo: <http://purl.org/ontology/mo/>
+            PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            INSERT DATA 
+            {{GRAPH :Bands
+            {{:{} foaf:name '{}';
+                       rdf:type schema:MusicGroup;
+                       mo:activity_start '{}';
+                       schema:logo '{}';
+                       :style '{}' .
+            }}
+            }}""".format(band_name.replace(" ", ""), band_name, activity_started, logo_url, style)
+        print(query)
+        sparql_insert.setQuery(query)
+        sparql_insert.method = 'POST'
+        print(sparql_insert.query())
+        return redirect(url_for('bands_page'))

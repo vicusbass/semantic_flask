@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block title %}Bands{% endblock %}
+{% block content %}
+<br/>
+<div class="row">
+    <form action="/result" method="post">
+        <div class="form-group">
+            <label for="band_name_id">Band name</label>
+            <input type="text" class="form-control" id="band_name_id" name="band_name" required="true">
+        </div>
+        <div class="form-group">
+            <label for="band_genre_id">Main genre</label>
+            <select class="form-control" id="band_genre_id" name="style" required="true">
+                {% for genre in genres %}
+                    <option value={{genre["genre"].value}}>{{genre["genretitle"].value}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="activity_started_id">Start year</label>
+            <input type="number" class="form-control" id="activity_started_id" placeholder="1979" name="activity_started" required="true">
+        </div>
+        <div class="form-group">
+            <label for="logo_url">Logo URL</label>
+            <input type="url" class="form-control" id="logo_url" name="logo_url">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+{% endblock %}

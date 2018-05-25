@@ -2,21 +2,33 @@
 {% block title %}Bands{% endblock %}
 {% block content %}
 <br/>
-{% for band in bands %}
-<div class="card" style="width: 18rem;" about="{{band['band'].value}}">
-    <img class="card-img-top" src={{band["logo"].value}} alt="Band logo">
-    <div class="card-body">
+<div class="row">
+    <a class="btn btn-outline-success" href="/addband" role="button">Add band</a>
+</div>
+<br/>
+<div class="row">
+    {% for band in bands %}
+    <div class="col-md-3">
+        <div class="card" style="width: 18rem; height: 18rem;" about="{{band['band'].value}}">
+            <div style="width: 18rem; height: 8rem;">
+                <img class="card-img-top" src={{band["logo"].value}}
+                     alt="Band logo">
+            </div>
+            <div class="card-body">
         <span property="foaf:name">
         <h5 class="card-title">{{band["name"].value}}</h5>
         </span>
-        <span rel=":style">
+                <span rel=":style">
             <span resource={{band["style"].value}}>
                 <p class="card-text">Genre: <span property="dc:title">{{band["stylename"].value}}</span></p>
             </span>
         </span>
+            </div>
+        </div>
     </div>
-</div>
-<br/>
-{% endfor %}
+    <div class="col-md-1">
+    </div>
 
+    {% endfor %}
+</div>
 {% endblock %}
