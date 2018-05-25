@@ -12,7 +12,8 @@
             <label for="band_genre_id">Main genre</label>
             <select class="form-control" id="band_genre_id" name="style" required="true">
                 {% for genre in genres %}
-                    <option value={{genre["genre"].value}}>{{genre["genretitle"].value}}</option>
+                    <!--<option value={{genre["genre"].value}}>{{genre["genretitle"].value}}</option>-->
+                    <option>{{genre["genretitle"].value}}</option>
                 {% endfor %}
             </select>
         </div>

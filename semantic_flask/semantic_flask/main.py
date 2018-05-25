@@ -36,7 +36,6 @@ def list_bands():
                     select distinct ?band ?name ?logo ?style ?stylename
                     where
                     {
-                    ?band foaf:member ?artist .
                     ?band  foaf:name  ?name .
                     ?band schema:logo ?logo .
                     ?band :style ?style .
@@ -54,6 +53,7 @@ def list_artists():
         PREFIX schema: <http://schema.org/>
         PREFIX : <http://example.org/>
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+        prefix dc: <http://purl.org/dc/elements/1.1/> 
         SELECT ?artist ?predicate ?band ?artistname ?bandname
         WHERE{
           ?artist a mo:MusicArtist .
@@ -110,14 +110,18 @@ def result_band_added():
             PREFIX schema: <http://schema.org/>
             PREFIX mo: <http://purl.org/ontology/mo/>
             PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-            INSERT DATA 
+            PREFIX dc: <http://purl.org/dc/elements/1.1/> 
+            INSERT 
             {{GRAPH :Bands
             {{:{} foaf:name '{}';
                        rdf:type schema:MusicGroup;
                        mo:activity_start '{}';
                        schema:logo '{}';
-                       :style '{}' .
+                       :style ?style .
             }}
+            }}
+            WHERE
+            {{ ?style dc:title '{}'
             }}""".format(band_name.replace(" ", ""), band_name, activity_started, logo_url, style)
         print(query)
         sparql_insert.setQuery(query)
