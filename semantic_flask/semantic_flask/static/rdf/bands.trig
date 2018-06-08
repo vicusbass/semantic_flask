@@ -33,12 +33,13 @@
            rdfs:domain schema:MusicGroup;
            rdfs:range mo:Genre;
            rdfs:comment "Primary style of music";
-           rdfs:subPropertyOf dbo:genre.
+           rdfs:subPropertyOf schema:genre.
 
-    :byArtist a owl:TopObjectProperty;
+    :recordedBy a owl:TopObjectProperty;
            rdfs:domain schema:MusicAlbum;
            rdfs:range schema:MusicGroup;
-           rdfs:comment "Recorded by artist".
+           rdfs:comment "Recorded by artist";
+           rdfs:subPropertyOf schema:byArtist.
 
     :nickname a owl:DatatypeProperty ;
               rdfs:domain mo:MusicArtist ;
@@ -188,25 +189,25 @@
     :Scenes_from_a_memory a :LP;
                           :released 1999;
                           dc:title "Scenes from a memory";
-                          :byArtist :DreamTheater.
+                          :recordedBy :DreamTheater.
     :Once_in_a_LIVEtime a :LiveLP;
                         :released 1998;
                         dc:title "Once in a LIVEtime";
-                        :byArtist :DreamTheater.
+                        :recordedBy :DreamTheater.
     :Awake_demos a :Bootleg;
                  :released 1994;
                  dc:title "Awake demos";
-                 :byArtist :DreamTheater.
+                 :recordedBy :DreamTheater.
     :The_black_album a :LP;
                           :released 1991;
                           dc:title "The black album";
-                          :byArtist :Metallica.
+                          :recordedBy :Metallica.
     :The_Metallica_collection a :Compilation;
                           :released 2009;
                           dc:title "The metallica collection";
-                          :byArtist :Metallica.
+                          :recordedBy :Metallica.
     :Beyond_magnetic a :EP;
                           :released 2011;
                           dc:title "Beyond magnetic";
-                          :byArtist :Metallica.
+                          :recordedBy :Metallica.
 }
